@@ -1,0 +1,7 @@
+phewebengine: the C interface between the Phorepoc browser frontend and a web engine
+Copyright The Phorepoc Authors (see AUTHORS)
+
+Phorepoc was founded by Kyriakos Bompotis.
+
+All files are licensed under the Apache License 2.0 (LICENSE). The header is deliberately a separate repository under a
+permissive licence: it is the only thing a web engine (whatever its own licence) and the browser frontend share.
