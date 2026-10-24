@@ -1,4 +1,6 @@
-# phewebengine
+# Phorepoc webengine
+
+Repository: `Phorepoc/webengine`. The interface keeps the component name `phewebengine` (`phewebengine.h`, `PheWebEngineApi`).
 
 The C interface between the [Phorepoc](https://github.com/Phorepoc) browser frontend (`phebrowser`, in
 [core](https://github.com/Phorepoc/core)) and a web engine: [webkit-symbian](https://github.com/Phorepoc/webkit-symbian), a

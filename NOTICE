@@ -1,4 +1,4 @@
-phewebengine: the C interface between the Phorepoc browser frontend and a web engine
+Phorepoc webengine (component name: phewebengine): the C interface between the Phorepoc browser frontend and a web engine
 Copyright The Phorepoc Authors (see AUTHORS)
 
 Phorepoc was founded by Kyriakos Bompotis.
