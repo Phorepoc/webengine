@@ -1,27 +1,32 @@
-# Phorepoc webengine
+# webengine
 
-Repository: `Phorepoc/webengine`. The interface keeps the component name `phewebengine` (`phewebengine.h`, `PheWebEngineApi`).
+This is the plug-in interface between [Phorepoc](https://github.com/Phorepoc)'s browser and the engine that draws the
+pages. The browser app, `phebrowser` in [core](https://github.com/Phorepoc/core), doesn't know which engine it's
+running. It talks to whichever one is installed through this one C header, and the engine talks back the same way.
 
-The C interface between the [Phorepoc](https://github.com/Phorepoc) browser frontend (`phebrowser`, in
-[core](https://github.com/Phorepoc/core)) and a web engine: [webkit-symbian](https://github.com/Phorepoc/webkit-symbian), a
-NetSurf port, or any other. One header, plain C, UTF-16 strings, no Symbian and no engine headers.
+That means engines can come and go independently of the browser. [webkit-symbian](https://github.com/Phorepoc/webkit-symbian)
+is one, a NetSurf port could be another, and you can install them from Get Apps instead of having them built into the
+ROM.
 
-| path | what |
-|---|---|
-| `os/inc/phorepoc/phewebengine.h` | the interface: events, `PheWebEngineApi` (a table of function pointers), capability bits, `PheWebEngineGetApi` |
+## How it works
 
-An engine package implements the table and exports `PheWebEngineGetApi` (or registers an ECom implementation of interface
-`0xE7016B01`); the frontend lists installed engines and loads the chosen one at run time. Neither side includes the other's
-code: both include this header. Engines are installed from the app store, not shipped in the ROM.
+Everything is in `os/inc/phorepoc/phewebengine.h`. It's plain C with UTF-16 strings, and it doesn't include any
+Symbian or engine headers, so both sides can use it without pulling in each other's code.
 
-The header is versioned (`PHE_WEBENGINE_VERSION`, and the table's `size` field: new entries are appended, a missing entry is
-NULL). Features are advertised in `caps` (find, snapshot, zoom, downloads, private views, suspend, session state).
+An engine fills in a table of function pointers, `PheWebEngineApi`, and exports `PheWebEngineGetApi` to hand it over.
+It can also register as an ECom plug-in with interface `0xE7016B01`. The browser lists the installed engines and loads
+the one you pick.
+
+The interface can grow without breaking anyone. `PHE_WEBENGINE_VERSION` and the table's `size` field tell the browser
+which version it's talking to. New functions only ever go at the end, and a function an engine doesn't provide is left
+NULL. Optional features, such as find in page, snapshots, zoom, downloads, private windows and saving the session, are
+advertised as bits in `caps`.
 
 ## Using it
 
-The repository is a layer, like the adaptations: add it to `PHOREPOC_ADAPTATIONS` and its `os/` (so `os/inc/phorepoc/`) is laid
-over core's OS tree; the include-tree export publishes it as `<phorepoc/phewebengine.h>`.
+Add this repository to `PHOREPOC_ADAPTATIONS` when you build, and the header becomes available to every component as
+`<phorepoc/phewebengine.h>`.
 
-## Licence
+## License
 
-Apache-2.0 (`LICENSE`, `NOTICE`, `AUTHORS`).
+Apache-2.0.
