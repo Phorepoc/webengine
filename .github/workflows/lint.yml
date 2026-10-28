@@ -31,3 +31,5 @@ jobs:
           echo '#include <phorepoc/phewebengine.h>' > /tmp/t.c
           gcc -std=c99 -Wall -Werror -fsyntax-only -I os/inc /tmp/t.c
           g++ -std=c++98 -Wall -Werror -fsyntax-only -x c++ -I os/inc /tmp/t.c
+  layering:
+    uses: Phorepoc/pdk/.github/workflows/layering.yml@main
