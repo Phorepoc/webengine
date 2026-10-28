@@ -5,7 +5,7 @@ pages. The browser app, `phebrowser` in [core](https://github.com/Phorepoc/core)
 running. It talks to whichever one is installed through this one C header, and the engine talks back the same way.
 
 That means engines can come and go independently of the browser. [webkit-symbian](https://github.com/Phorepoc/webkit-symbian)
-is one, a NetSurf port could be another, and you can install them from Get Apps instead of having them built into the
+is one, a NetSurf port could be another, and you can install them from the Catalogue instead of having them built into the
 ROM.
 
 ## How it works
