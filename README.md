@@ -1,6 +1,6 @@
 # webengine
 
-This is the plug-in interface between [Phorepoc](https://github.com/Phorepoc)'s browser and the engine that draws the
+This is the plug-in interface between [Phorepoc OS](https://github.com/Phorepoc)'s browser and the engine that draws the
 pages. The browser app, `phebrowser` in [core](https://github.com/Phorepoc/core), doesn't know which engine it's
 running. It talks to whichever one is installed through this one C header, and the engine talks back the same way.
 
@@ -11,7 +11,7 @@ ROM.
 ## How it works
 
 Everything is in `os/inc/phorepoc/phewebengine.h`. It's plain C with UTF-16 strings, and it doesn't include any
-Symbian or engine headers, so both sides can use it without pulling in each other's code.
+system or engine headers, so both sides can use it without pulling in each other's code.
 
 An engine fills in a table of function pointers, `PheWebEngineApi`, and exports `PheWebEngineGetApi` to hand it over.
 It can also register as an ECom plug-in with interface `0xE7016B01`. The browser lists the installed engines and loads
