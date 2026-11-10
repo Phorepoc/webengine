@@ -66,7 +66,8 @@ enum PheString {
     PHE_STR_URL = 0, PHE_STR_TITLE, PHE_STR_ERROR, PHE_STR_NEWVIEW, PHE_STR_FAVICON_URL, PHE_STR_FOCUS_URL /* link under finger */,
     PHE_STR_DLG_TEXT, PHE_STR_DLG_DEFAULT, PHE_STR_DLG_HOST,   /* for PHE_EV_DIALOG (id selects the request) */
     PHE_STR_DL_URL, PHE_STR_DL_NAME, PHE_STR_DL_MIME,          /* for PHE_EV_DOWNLOAD (id selects the download) */
-    PHE_STR_CERT_SUMMARY                                       /* issuer/subject/error text for a PHE_DLG_CERT dialog */
+    PHE_STR_CERT_SUMMARY,                                      /* issuer/subject/error text for a PHE_DLG_CERT dialog */
+    PHE_STR_FOCUS_VALUE        /* the focused text field's value when PHE_EV_FOCUS a = 2 was posted ("" for a password field) */
 };
 
 enum PheSecurity { PHE_SEC_NONE = 0 /* http, file */, PHE_SEC_SECURE = 1 /* valid https */, PHE_SEC_MIXED = 2, PHE_SEC_BROKEN = 3 /* cert error continued */ };
@@ -158,6 +159,10 @@ typedef struct PheWebEngineApi {
 
     /* privacy: bits 1 cache, 2 cookies, 4 history/session, 8 passwords, 16 site data */
     void (*clear_data)(int what_bits);
+
+    /* replace the focused text field's whole value (the frontend's field editor started from PHE_STR_FOCUS_VALUE);
+       an engine without it (size) gets text(), which inserts at the caret */
+    void (*set_field)(PheView v, const unsigned short* s, int len);
 } PheWebEngineApi;
 
 /* the one export of an engine DLL (ordinal 1), or what an ECom implementation factory returns */
