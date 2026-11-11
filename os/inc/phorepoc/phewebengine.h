@@ -44,7 +44,7 @@ enum PheEventKind {
     PHE_EV_SECURITY,      /* b = security level changed without a navigation (mixed content appeared, ...) */
     PHE_EV_FOCUS,         /* a = focused element kind: 0 none, 1 link, 2 text input (the frontend shows the keyboard);
                              b = 1: the text input is a password (the frontend edits it in a secret editor). A focus moving
-                             from one text input to another is posted again (a = 2 after a = 2) */
+                             from one text input to another is posted as a = 0, then a = 2 */
     PHE_EV_NEW_VIEW,      /* the page wants a new window/tab: URL in PHE_STR_NEWVIEW; a = 1 background */
     PHE_EV_FAVICON,       /* PHE_STR_FAVICON_URL is a new icon URL (optional) */
     PHE_EV_FIND_RESULT,   /* a = match count, b = current match (1-based, 0 none) */
